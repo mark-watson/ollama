@@ -18,25 +18,11 @@
                       (json:encode-json
                        `(("prompt" . ,starter-text)
                          ("model" . ,model-name)
-                         ("stream" . 'false))
+                         ("stream" . :false))
                        s)))
          (curl-command (format nil "curl ~A -d '~A'" model-host json-data)))
     (print curl-command)
     (ollama-helper curl-command)))
-
-(defun completions (starter-text)                                                                                  (let* ((d                                                                                                                
-															    (concatenate                                                                                                     
-															     'string                                                                                                         
-															     "{\"prompt\":\""                                                                                                
-															     starter-text                                                                                                    
-															     "\", "                                                                                                          
-															     "\"model\":\"" model-name "\", \"stream\":false}"))                                                             
-          (curl-command                                                                                                     
-           (concatenate                                                                                                     
-            'string                                                                                                         
-            "curl " model-host                                                                                              
-            " -d '" d "'")))                                                                                                (print curl-command)
-														     (ollama-helper curl-command)))
 
 (defun summarize (some-text)
   (completions (concatenate 'string "Summarize: " some-text)))
