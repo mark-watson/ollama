@@ -24,3 +24,4 @@ rdflib-py4cl/PYTHON_RDFLIB_SETUP_install/rdflibstub/build
 *.wx32fsl
 __pycache__
 
+.aider*
