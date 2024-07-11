@@ -18,10 +18,25 @@
                       (json:encode-json
                        `(("prompt" . ,starter-text)
                          ("model" . ,model-name)
-                         ("stream" . :false))
+                         ("stream" . 'false))
                        s)))
          (curl-command (format nil "curl ~A -d '~A'" model-host json-data)))
+    (print curl-command)
     (ollama-helper curl-command)))
+
+(defun completions (starter-text)                                                                                  (let* ((d                                                                                                                
+															    (concatenate                                                                                                     
+															     'string                                                                                                         
+															     "{\"prompt\":\""                                                                                                
+															     starter-text                                                                                                    
+															     "\", "                                                                                                          
+															     "\"model\":\"" model-name "\", \"stream\":false}"))                                                             
+          (curl-command                                                                                                     
+           (concatenate                                                                                                     
+            'string                                                                                                         
+            "curl " model-host                                                                                              
+            " -d '" d "'")))                                                                                                (print curl-command)
+														     (ollama-helper curl-command)))
 
 (defun summarize (some-text)
   (completions (concatenate 'string "Summarize: " some-text)))
@@ -74,7 +89,7 @@
 
 (print (ollama:completions "The President went to Congress"))
 
-(print (ollama:summarize "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter.[19] When viewed from Earth, Jupiter can be bright enough for its reflected light to cast visible shadows,[20] and is on average the third-brightest natural object in the night sky after the Moon and Venus."))
+(Print (ollama:summarize "Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter.[19] When viewed from Earth, Jupiter can be bright enough for its reflected light to cast visible shadows,[20] and is on average the third-brightest natural object in the night sky after the Moon and Venus."))
 
 (print (ollama:answer-question "Where were the 1992 Olympics held?"))
 (print (ollama:answer-question "Where is the Valley of Kings?"))
