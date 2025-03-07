@@ -64,13 +64,13 @@
          (message (list (cons :|role| "user")
                         (cons :|content| starter-text)))
          (base-data (list (cons :|model| *model-name*)
-                          (cons :|stream| nil)  ; nil should be false, but we'll ensure it below
+                          (cons :|stream| nil)
                           (cons :|messages| (list message))))
          (data (if function-defs
                    (append base-data (list (cons :|tools| function-defs)))
                    base-data))
          (json-data (lisp-to-json-string data))
-         ;; Force "stream":false by replacing null with false in the string
+         ;; Hack: cl-json encodes nil as null, but we need false for stream
          (fixed-json-data (substitute-subseq json-data ":null" ":false" :test #'string=))
          (curl-command
           (format nil "curl ~a -d ~s"
@@ -78,7 +78,6 @@
                   fixed-json-data)))
     (ollama-helper curl-command)))
 
-;; Helper function to replace a subsequence in a string
 (defun substitute-subseq (string old new &key (test #'eql))
   (let ((pos (search old string :test test)))
     (if pos
