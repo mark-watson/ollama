@@ -112,3 +112,10 @@ Raw response: {"model":"qwen2.5:14b","created_at":"2025-03-07T18:24:47.736124Z",
 |#
 
 ;;(ollama:completions "Complete the following text: The President went to")
+
+;; Helper functions for summarization and question answering
+(defun summarize (some-text)
+  (completions (concatenate 'string "Summarize: " some-text)))
+
+(defun answer-question (some-text)
+  (completions (concatenate 'string "\nQ: " some-text "\nA:")))
