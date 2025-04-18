@@ -11,7 +11,7 @@ to get all of the library examples from my book.
 
 2024/01/09: updated to latest ollama APIs, now using gpt-4
 
-## Runnign the Ollama LLM service
+## Running the Ollama LLM service
 
     ollama serve
 
@@ -28,19 +28,6 @@ It is not uncommon for a president to go to Congress to discuss matters related 
 
 Also try **ollama:summarize** and **ollama:answer-question**. See my book for examples and example output.
 
-## Embeddings
-
-```
-(setf e1 (ollama::embeddings "John bought a new car"))
-
-(setf e2 (ollama::embeddings "who bought what"))
-
-CL-USER 23 > (ollama::dot-product e1 e1)
-0.9999999
-
-CL-USER 24 > (ollama::dot-product e1 e2)
-0.7841768
-```
 
 ## Experiments with prompts (material for Prompt Engineering Chapter)
 
